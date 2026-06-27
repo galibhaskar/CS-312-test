@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Blog App</title>
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+
+    <div class="author">
+        <h1 class="author__heading">Welcome to the blog</h1> 
+    </div>
+
+    
+    <img src="/img/nadiia-ganzhyi-cfE5i6sHCFA-unsplash.jpg" class="hero-image" width="981" height="528">
+
+
+    <div class="container">
+
+        <h1>Blog Application</h1>
+
+        <form action="/create" method="POST">
+            <input
+                type="text"
+                name="author"
+                placeholder="Author Name" required>
+            <input
+                type="text"
+                name="title"
+                placeholder="Blog Title" required>
+                <textarea
+                    name="content"
+                    placeholder="Write your blog..." required>
+                </textarea>
+
+            <button type="submit">
+            Create Post
+            </button>
+        </form>
+
+        <hr>
+
+        <% posts.forEach(post => { %>
+
+            <div class="post">
+                    <h2><%= post.title %></h2>
+
+                    <p><%= post.body %></p>
+
+                    <p>
+                        <strong>Author:</strong>
+                        <%= post.creator_name %>
+                    </p>
+
+                    <p>
+                    <strong>Created:</strong>
+                    <%= post.date_created %>
+                    </p>
+
+                <% if (user && user.user_id === post.creator_user_id) { %>
+                    <a href="/edit/<%= post.blog_id %>">
+                        Edit
+                    </a>
+
+                    <form
+                        action="/delete/<%= post.blog_id %>"
+                        method="POST">
+
+                        <button type="submit">
+                            Delete
+                        </button>
+                    </form>
+
+                <% } %>
+            </div>
+    <% }) %>
+
+        <p>
+            Don't have an account?
+            <a href="/signup">Create one here</a>
+            If you have one
+            <a href="/signin"> Sign in here</a>
+        </p>
+
+
+        <section class= "articles">
+            <h2 class="articles__heading"> Latest Posts</h2>
+                <ul class="article-ul">                    
+                </ul>
+        </section>
+
+    </div>
+
+</body>
+</html>
