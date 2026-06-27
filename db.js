@@ -5,7 +5,8 @@ const pool = new Pool({
         host: "ep-super-wave-atv5s3kv-pooler.c-9.us-east-1.aws.neon.tech",
         database: "neondb",
         password: "npg_yDtZPu4h9Jws",
-        port: 5432
+        port: 5432,
+        ssl: { rejectUnauthorized: true }
     });
 
 module.exports = pool;
