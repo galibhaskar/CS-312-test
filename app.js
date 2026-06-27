@@ -181,8 +181,15 @@ app.post("/delete/:id", async (req, res) => {
 
 });
 
-app.listen(PORT, () => {
-    console.log(`Server running on port ${PORT}`);
+app.use((err, req, res, next) => {
+    console.error(err);
+    res.status(500).send("Error: " + err.message);
 });
+
+if (process.env.NODE_ENV !== "production") {
+    app.listen(PORT, () => {
+        console.log(`Server running on port ${PORT}`);
+    });
+}
 
 module.exports = app;
